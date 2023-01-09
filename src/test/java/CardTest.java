@@ -3,8 +3,6 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 
 import java.time.Duration;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
@@ -13,9 +11,6 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class CardTest {
 
-    private String date1 = LocalDate.now().plusDays(4).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-    private String date2 = LocalDate.now().plusDays(40).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-
     @Test
     public void test1() {
         open("http://localhost:9999/");
@@ -23,6 +18,8 @@ public class CardTest {
         val name = user.getName();
         val phone = user.getPhoneNumber();
         val city = user.getCity();
+        val date1 = GeneratorClass.DateGeneration.DateGen(4);
+        val date2 = GeneratorClass.DateGeneration.DateGen(40);
 
         $("span[data-test-id = city] input").setValue(city.substring(0,2));
         $$("div.menu div.menu-item").find(exactText(city)).click();
